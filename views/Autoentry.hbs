@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto Details Entry</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f1f4f9, #e2ecf6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .header {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #28a745;
+      animation: slideInDown 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-group input, .input-group textarea {
+      width: 100%;
+      padding: 12px 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border 0.3s;
+      resize: none;
+    }
+
+    .input-group input:focus, .input-group textarea:focus {
+      border-color: #28a745;
+    }
+
+    .input-group label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: white;
+      color: #999;
+      padding: 0 5px;
+      transition: 0.3s;
+      pointer-events: none;
+    }
+
+    .input-group input:focus + label,
+    .input-group input:not(:placeholder-shown) + label,
+    .input-group textarea:focus + label,
+    .input-group textarea:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 8px;
+      font-size: 12px;
+      color: #28a745;
+    }
+
+    .submit-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.1s ease, background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #1e7e34;
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Add Auto Details</div>
+
+  <div class="form-container">
+    <form action="/autobooking" method="post">
+  {{#if message}}
+  <div style="color: green; font-weight: bold;">
+    {{message}}
+  </div>
+{{/if}}
+      <div class="input-group">
+        <input type="text" id="name" name="name" required />
+        <label for="name">Name</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="auto-number" name="autono" placeholder=" " required />
+        <label for="auto-number">Auto Number</label>
+      </div>
+
+      <div class="input-group">
+        <input type="tel" id="phone" name="phone" placeholder=" " required pattern="[0-9]{10}" />
+        <label for="phone">Phone Number</label>
+      </div>
+
+      <div class="input-group">
+        <textarea id="address" rows="2" name="address" required></textarea>
+        <label for="address">Address</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="area" name="area" placeholder=" " required />
+        <label for="area">Area</label>
+      </div>
+
+      <button class="submit-btn" type="submit">Save Details</button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find Auto by Area</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], select {
+      padding: 10px;
+      width: 80%;
+      max-width: 300px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ffffff;
+      color: #0072ff;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: yellow;
+    }
+
+    table {
+      margin: 30px auto;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 95%;
+      background: #fff;
+      color: #333;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 🔽 Make table scrollable on small screens */
+    @media screen and (max-width: 600px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      th, td {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚕 Search Auto by Area</h1>
+  <form action="/search-area" method="POST">
+    <input type="text" name="area" placeholder="Enter your area" required>
+    <br>
+    <button type="submit">Search</button>
+  </form>
+
+  {{#if message}}
+    <p class="message">{{message}}</p>
+  {{/if}}
+
+  {{#if results}}
+    <h2>Autos in: {{searchedArea}}</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Auto Number</th>
+        <th>Area</th>
+        <th>Action</th>
+      </tr>
+      {{#each results}}
+      <tr>
+        <td>{{this.Name}}</td>
+        <td>{{this.autonumber}}</td>
+        <td>{{this.area}}</td>
+        <td>
+          <form action="/booking" method="GET">
+            <input type="hidden" name="autonumber" value="{{this.autonumber}}" />
+            <button type="submit">Book</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  {{/if}}
+
+</body>
+</html>
